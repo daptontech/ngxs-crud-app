@@ -1,0 +1,26 @@
+<div class="col">
+    <div *ngIf="todos">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let todo of todos | async">
+                <td>{{ todo.id }}</td>
+                <td>{{ todo.title }}</td>
+                <td>
+                    <button class="btn btn-primary" (click)="editTodo(todo)">Edit</button>
+                </td>
+                <td>
+                    <button class="btn btn-primary" (click)="deleteTodo(todo.id)">Delete</button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

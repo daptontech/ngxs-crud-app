@@ -1,0 +1,33 @@
+<div class="card mt-3">
+    <div class="card-body">
+        <form [formGroup]="todoForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <label class="col-md-4">User Id</label>
+                <input type="number" class="form-control" formControlName="userId" #userId/>
+                <div *ngIf="todoForm.controls['userId'].invalid && (todoForm.controls['userId'].dirty || todoForm.controls['userId'].touched)"
+                     class="alert alert-danger">
+                    <div *ngIf="todoForm.controls['userId'].errors.required">
+                        User Id is required.
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-4">Title</label>
+                <input type="title" class="form-control" formControlName="title" #title/>
+                <div *ngIf="todoForm.controls['title'].invalid && (todoForm.controls['title'].dirty || todoForm.controls['title'].touched)"
+                     class="alert alert-danger">
+                    <div *ngIf="todoForm.controls['title'].errors.required">
+                        Title is required.
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <button type="submit"
+                        class="btn btn-primary mr-1"
+                        [disabled]="todoForm.pristine || todoForm.invalid">Submit
+                </button>
+                <button class="btn btn-primary" (click)="clearForm()">Clear</button>
+            </div>
+        </form>
+    </div>
+</div>
