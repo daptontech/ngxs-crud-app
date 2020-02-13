@@ -23,18 +23,20 @@ export class FormComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.selectedTodo.subscribe(todo => {
-      if (todo) {
-        this.todoForm.patchValue({
-          id: todo.id,
-          userId: todo.userId,
-          title: todo.title
-        });
-        this.editTodo = true;
-      } else {
-        this.editTodo = false;
-      }
-    });
+    this.formSubscription.add(
+      this.selectedTodo.subscribe(todo => {
+        if (todo) {
+          this.todoForm.patchValue({
+            id: todo.id,
+            userId: todo.userId,
+            title: todo.title
+          });
+          this.editTodo = true;
+        } else {
+          this.editTodo = false;
+        }
+      })
+    );
   }
 
   ngOnDestroy(): void {
