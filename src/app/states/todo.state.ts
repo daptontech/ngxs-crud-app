@@ -55,7 +55,6 @@ export class TodoState {
     @Action(UpdateTodo)
     updateTodo({getState, setState}: StateContext<TodoStateModel>, {payload, id}: UpdateTodo) {
         return this.todoService.updateTodo(payload, id).pipe(tap((result) => {
-            console.log(result);
             const state = getState();
             const todoList = [...state.todos];
             const todoIndex = todoList.findIndex(item => item.id === id);
