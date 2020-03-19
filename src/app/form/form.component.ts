@@ -52,19 +52,17 @@ export class FormComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
+    let action: UpdateTodo | AddTodo;
     if (this.editTodo) {
-      this.formSubscription.add(
-        this.store.dispatch(new UpdateTodo(this.todoForm.value, this.todoForm.value.id)).subscribe(() => {
-          this.clearForm();
-        })
-      );
+      action = new UpdateTodo(this.todoForm.value, this.todoForm.value.id);
     } else {
-      this.formSubscription.add(
-        this.formSubscription = this.store.dispatch(new AddTodo(this.todoForm.value)).subscribe(() => {
-          this.clearForm();
-        })
-      );
+      action = new AddTodo(this.todoForm.value);
     }
+    this.formSubscription.add(
+      this.store.dispatch(action).subscribe(() => {
+        this.clearForm();
+      })
+    );
   }
 
   clearForm() {
